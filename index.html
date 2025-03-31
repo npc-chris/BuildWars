@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HSL BuildWars</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link rel="icon" href="/images/HSL-CU logo.png" type="image/x-icon">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    /* Base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    body {
+      background-color: #000;
+      color: #fff;
+      line-height: 1.6;
+    }
+
+    /* Navigation */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: #000;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      border-bottom: 1px solid #222;
+    }
+
+    nav .logo {
+      width: 150px;
+      height: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem;
+      font-weight: bold;
+    }
+
+    nav .register-btn {
+      background-color: #8B1C2C;
+      color: #fff;
+      padding: 0.8rem 1.2rem;
+      border: none;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    nav .register-btn:hover {
+      background-color: #a02f3f;
+    }
+
+    /* Hero Section */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 4rem 2rem;
+      background: linear-gradient(
+        to bottom right,
+        rgba(0, 0, 0, 1),
+        rgba(139, 28, 44, 0.7)
+      );
+      
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+    }
+
+    .hero h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: #a02f3f;
+    }
+
+    .hero p {
+      max-width: 600px;
+      margin: 1rem auto;
+      font-size: 1.15rem;
+    }
+
+    /* Timeline Section */
+    .timeline {
+      padding: 4rem 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+      position: relative;
+      background-image: url('/images/photo_2023-04-14_11-48-02.jpg');
+      background-size: cover;
+      background-repeat: no-repeat; 
+      background-position: center; 
+    }
+
+
+    .timeline h2 {
+      text-align: center;
+      font-size: 2.4rem;
+      margin-bottom: 3rem;
+      color: #8B1C2C;
+      text-transform: uppercase;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      top: 130px;
+      bottom: 50px;
+      left: 50%;
+      width: 4px;
+      background: #8B1C2C;
+      transform: translateX(-50%);
+    }
+
+    .timeline-step {
+      position: relative;
+      margin-bottom: 3rem;
+      width: 50%;
+      padding: 1.5rem 2rem;
+      background-color: #111;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.4);
+    }
+
+    /* Alternate timeline steps */
+    .timeline-step:nth-child(odd) {
+      left: 0;
+      text-align: right;
+    }
+
+    .timeline-step:nth-child(even) {
+      left: 50%;
+      text-align: left;
+    }
+
+    /* Circles on timeline */
+    .timeline-step::before {
+      content: "";
+      position: absolute;
+      top: 20px;
+      width: 16px;
+      height: 16px;
+      background: #8B1C2C;
+      border: 4px solid #111;
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    .timeline-step:nth-child(odd)::before {
+      right: -38px;
+    }
+
+    .timeline-step:nth-child(even)::before {
+      left: -38px;
+    }
+
+    .timeline-step .step-title {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      font-size: 1.4rem;
+      color: #a02f3f;
+    }
+
+    .timeline-step .step-date {
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      opacity: 0.8;
+    }
+
+    .timeline-step .step-description {
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    /* FAQ Section */
+    .faq {
+      padding: 4rem 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .faq h2 {
+      text-align: center;
+      font-size: 2.4rem;
+      margin-bottom: 2rem;
+      color: #8B1C2C;
+      text-transform: uppercase;
+    }
+
+    .faq-item {
+      margin-bottom: 1.5rem;
+    }
+
+    .faq-item button {
+      width: 100%;
+      background: #111;
+      color: #fff;
+      padding: 1rem;
+      text-align: left;
+      border: none;
+      border-radius: 4px;
+      font-size: 1rem;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .faq-item button::after {
+      content: "+";
+      position: absolute;
+      right: 1rem;
+      font-size: 1.5rem;
+      transition: transform 0.3s ease;
+    }
+
+    .faq-item button.active::after {
+      content: "-";
+      transform: rotate(180deg);
+    }
+
+    .faq-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+      background-color: #222;
+      padding: 0 1rem;
+      border-radius: 0 0 4px 4px;
+    }
+
+    .faq-content p {
+      padding: 1rem 0;
+      margin: 0;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background-color: #000;
+      font-size: 0.9rem;
+      opacity: 0.8;
+      border-top: 1px solid #222;
+    }
+
+    /* Responsive adjustments for timeline */
+    @media (max-width: 768px) {
+      .timeline::before {
+        left: 8px;
+      }
+      .timeline-step {
+        width: 100%;
+        left: 0 !important;
+        text-align: left;
+        margin-left: 30px;
+      }
+      .timeline-step::before {
+        left: -38px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <img class="logo" src="/images/HSL-CU logo.png"  alt="Description of the image">
+
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSehPHmqPDGVIVHYDp7lqNtl2dOlzrKv1XvBLM-q4jvW4cqs1Q/viewform?usp=sf_link" target="_blank" class="register-btn">Register</a>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h2>THE HSL Presents</h2>
+    <h1>BuildWars</h1>
+    <p>
+      BuildWars is a series of hackathon featuring thematic challenges. Whether you're in for an in-depth build or thrive in fast-paced challenges, we have a fair challenge for you.<br/>
+      Grab your team with you and aim for the prize of <strong>₦500,000!</strong> <br/>
+    </p>
+  </section>
+
+  <!-- Timeline Section -->
+
+  <section class="timeline">
+    <h2>Event Timeline</h2>
+    <div class="timeline-step">
+      <div class="step-title">Initiation / Onboarding</div>
+      <div class="step-date">March 31 - April 12th, 2025</div>
+      <div class="step-description">
+        <p>
+          Registration opens for the event. Participants receive detailed guidelines and rules, ensuring everyone is clear about expectations. <br/>
+          To help participants understand what the hackathon entails, an <strong>Open Round</strong> would be held on the <strong>29th of March.</strong> <br/>
+          Participation in the Open Round is still restricted to registered individuals and teams.
+        </p>
+      </div>
+    </div>
+    <div class="timeline-step">
+      <div class="step-title">Building & Qualifiers</div>
+      <div class="step-date">April 26 - May 24, 2025 (Every Saturday)</div>
+      <div class="step-description">
+        <p>
+          Every Saturday, contestants showcase their progress in pitch competitions. Finalists are chosen through demos, pitch decks, and exhibits. Look out for workshops organized nearby.
+        </p>
+      </div>
+    </div>
+    <div class="timeline-step">
+      <div class="step-title">Competition Final</div>
+      <div class="step-date">Date TBD (To Be Determined)</div>
+      <div class="step-description">
+        <p>
+          After much improvement, finalists present their best projects developed over the duration of the hackathon over two stages: pitches and live demos. Judges evaluate each project, evaluating the market readiness and scalability of their products. The winning team receives <strong>₦500,000.</strong> Additional prizes and certificates are also awarded.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item">
+      <button>Who can participate?</button>
+      <div class="faq-content">
+        <p>
+          The hackathon is open to all students <strong>on campus.</strong> This implies that students currently on IT are exempt from the event. Teams can consist of 3-5 members, and individual participants will be matched to create balanced teams. <br/>
+        </p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button>Do I need to pay any fee?</button>
+      <div class="faq-content">
+        <p>
+          The requirement to participation is an issued ID card to have access to the Workspace in CUCRID Building. <br/>
+          This is issued only to HSL members who have paid their community dues for the semester. Visit the HSL Office on 3rd Floor, CUCRID Building for more details.
+        </p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button>What if I don't have a team?</button>
+      <div class="faq-content">
+        <p>
+          Individual participants are welcome. We will facilitate team matching to ensure you have the right mix of skills. <br/>
+          Special judging criteria would be announced to all participants as required.
+        </p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button>How will winners be selected?</button>
+      <div class="faq-content">
+        <p>
+          Projects and tasks in each round would judged be based on creativity, technical complexity, and impact. Winners are determined weekly via a live leaderboard—more details coming soon.
+        </p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <button>How do I balance the event and other school activities?</button>
+      <div class="faq-content">
+        <p>
+          We recommend you still take your school work as seriously as you would otherwise. For excursions and school recommended events, such as EYAC and Chaplaincy conferences, announcements would be made as necessary.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    &copy; <span id="year"></span> Hebron Startup Lab (HSL). All rights reserved.
+  </footer>
+
+  <script>
+    // Update footer year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // FAQ Accordion functionality
+    const faqButtons = document.querySelectorAll(".faq-item button");
+
+    faqButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const content = btn.nextElementSibling;
+        btn.classList.toggle("active");
+        if (content.style.maxHeight) {
+          content.style.maxHeight = null;
+        } else {
+          // Close other FAQ items
+          faqButtons.forEach((otherBtn) => {
+            if (otherBtn !== btn) {
+              otherBtn.classList.remove("active");
+              otherBtn.nextElementSibling.style.maxHeight = null;
+            }
+          });
+          content.style.maxHeight = content.scrollHeight + "px";
+        }
+      });
+    });
+  </script>
+</body>
+</html>
